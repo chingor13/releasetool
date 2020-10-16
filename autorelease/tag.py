@@ -73,6 +73,11 @@ def main(args) -> reporter.Reporter:
     report = reporter.Reporter("autorelease.tag")
     # TODO(busunkim): Use proxy once KMS setup is complete.
     gh = github.GitHub(args.github_token, use_proxy=False)
+
+    if gh.token:
+        print("GH credentials are present")
+    else:
+        print("Missing credentials")
     kokoro_session = kokoro.make_authorized_session(args.kokoro_credentials)
 
     # First, we need to get a list of all pull requests (GitHub calls these "issues")
